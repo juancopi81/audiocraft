@@ -69,7 +69,7 @@ def ui(**kwargs):
         gr.Markdown(
             """
             # 8Beats
-            ![](file/8Beats_Logo.jpg)
+            ![](file/8Beats_Logo_resized_crop.jpg)
             8Beats private demo for audio music generation. Using [MusicGen](https://github.com/facebookresearch/audiocraft), a simple and controllable model for music generation
             """
         )

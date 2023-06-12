@@ -68,9 +68,9 @@ def ui(**kwargs):
     with gr.Blocks() as interface:
         gr.Markdown(
             """
-            # MusicGen
-            This is your private demo for [MusicGen](https://github.com/facebookresearch/audiocraft), a simple and controllable model for music generation
-            presented at: ["Simple and Controllable Music Generation"](https://huggingface.co/papers/2306.05284)
+            # 8Beats
+            ![](file/8Beats_Logo.jpg)
+            8Beats private demo for audio music generation. Using [MusicGen](https://github.com/facebookresearch/audiocraft), a simple and controllable model for music generation
             """
         )
         if IS_SHARED_SPACE:
@@ -128,6 +128,11 @@ def ui(**kwargs):
                     None,
                     "medium",
                 ],
+                [
+                    "brazilian funky house with acoustic guitars, fast bpm",
+                    None,
+                    "large"
+                ],
             ],
             inputs=[text, melody, model],
             outputs=[output]
@@ -139,7 +144,7 @@ def ui(**kwargs):
             The model will generate a short music extract based on the description you provided.
             You can generate up to 30 seconds of audio.
 
-            We present 4 model variations:
+            There are 4 model variations:
             1. Melody -- a music generation model capable of generating music condition on text and melody inputs. **Note**, you can also use text only.
             2. Small -- a 300M transformer decoder conditioned on text only.
             3. Medium -- a 1.5B transformer decoder conditioned on text only.
@@ -148,9 +153,14 @@ def ui(**kwargs):
             When using `melody`, ou can optionaly provide a reference audio from
             which a broad melody will be extracted. The model will then try to follow both the description and melody provided.
 
-            You can also use your own GPU or a Google Colab by following the instructions on our repo.
-            See [github.com/facebookresearch/audiocraft](https://github.com/facebookresearch/audiocraft)
-            for more details.
+            ### Parameters:
+            - Top-K: Unclear how it affects generation, needs more testing.
+            - Top-P: Same as above.
+            - Duration: Length of generated music.
+                Classifier Free Guidance: Controls creativity, lower number = "more creative freedom" in theory at least.
+                Temperature: Also a sort of creativity guide, your outputs will be terrible if this is too high.
+                Segments: Number of segments to generate. Each segment will be (duration-overlap) long, so if duration is 30 seconds and overlap is 5 seconds, with 3 segments, you will get 75 seconds of audio out.
+                Overlap: The overlap for the segment, as explained above. More overlap = more consistent music between segments
             """
         )
 
